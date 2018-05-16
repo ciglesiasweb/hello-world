@@ -38,3 +38,6 @@ ng new hello-world
 
 
 ng serve
+
+ng g c component
+ng g s service
