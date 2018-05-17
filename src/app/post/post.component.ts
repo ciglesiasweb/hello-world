@@ -1,3 +1,5 @@
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
 import { PostService } from './../services/post.service';
 
 
@@ -19,6 +21,8 @@ export class PostComponent implements OnInit {
     this.service.getPosts()
       .subscribe(response => {
         this.posts = response.json();
+      }, error=> {
+        throw error
       })
   }
 
@@ -30,6 +34,8 @@ export class PostComponent implements OnInit {
         post['id'] = response.json().id
         this.posts.splice(0, 0, post)
         console.log(response.json())
+      }, error => {
+        alert('An unexpected error ocurred');
       })
   }
 
@@ -37,6 +43,11 @@ export class PostComponent implements OnInit {
     this.service.update(post['id'], { isRead: true })
       .subscribe(response => {
         console.log(response.json())
+      }, (error: AppError) => {
+        if (error instanceof NotFoundError)
+          alert('This post has alraedy been deleted.')
+        else
+          throw error;
       })
   }
 
