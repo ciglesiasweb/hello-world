@@ -1,3 +1,6 @@
+import { PostService } from './services/post.service';
+
+import { HttpModule } from '@angular/http';
 import { SummaryPipe } from './summary.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
@@ -8,6 +11,7 @@ import { CoursesComponent } from './courses.component';
 import { CoursesService } from './courses.service';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BootstrapPanelComponent } from './bootstrap-panel/bootstrap-panel.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -15,16 +19,18 @@ import { BootstrapPanelComponent } from './bootstrap-panel/bootstrap-panel.compo
     CoursesComponent,
     SummaryPipe,
     FavoriteComponent,
-    BootstrapPanelComponent
+    BootstrapPanelComponent,
+    PostComponent,
+    
   ],
   imports: [
     BrowserModule,
-    FormsModule
-
-    
+    FormsModule,
+    HttpModule,
   ],
   providers: [
-    CoursesService
+    CoursesService,
+    PostService
   ],
   bootstrap: [AppComponent]
 })
